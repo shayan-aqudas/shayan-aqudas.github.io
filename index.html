@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nooraya: Quran, Hadith, Salah | Shayan Aqudas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f291e;
+            --bg-card: #163829;
+            --gold: #C6A96B;
+            --gold-light: #e3c992;
+            --ivory: #F7F5EF;
+            --text-muted: #b8c7be;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: radial-gradient(circle at top, #1A4314 0%, var(--bg-dark) 70%);
+            color: var(--ivory);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Navbar */
+        header {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 24px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(198, 169, 107, 0.2);
+        }
+
+        .brand {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .nav-links a {
+            color: var(--ivory);
+            text-decoration: none;
+            margin-left: 24px;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        /* Hero Section */
+        .hero {
+            max-width: 900px;
+            margin: 60px auto 40px;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(198, 169, 107, 0.15);
+            color: var(--gold-light);
+            border: 1px solid rgba(198, 169, 107, 0.4);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            color: var(--ivory);
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: var(--gold);
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 650px;
+            margin: 0 auto 32px;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold) 0%, #a88948 100%);
+            color: #0d1f16;
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 8px 24px rgba(198, 169, 107, 0.25);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(198, 169, 107, 0.35);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--ivory);
+            border: 1px solid rgba(198, 169, 107, 0.3);
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(198, 169, 107, 0.15);
+        }
+
+        /* Features Grid */
+        .features {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: rgba(22, 56, 41, 0.7);
+            border: 1px solid rgba(198, 169, 107, 0.2);
+            border-radius: 16px;
+            padding: 28px;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--gold);
+        }
+
+        .card-icon {
+            font-size: 1.8rem;
+            margin-bottom: 14px;
+            display: inline-block;
+            background: rgba(198, 169, 107, 0.12);
+            padding: 10px 14px;
+            border-radius: 12px;
+        }
+
+        .card h3 {
+            color: var(--gold-light);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Developer Section */
+        .dev-section {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .dev-box {
+            background: linear-gradient(145deg, rgba(26, 67, 20, 0.6), rgba(15, 41, 30, 0.9));
+            border: 1px solid rgba(198, 169, 107, 0.3);
+            border-radius: 20px;
+            padding: 36px;
+            text-align: center;
+        }
+
+        .dev-box h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            margin-bottom: 12px;
+            font-size: 1.6rem;
+        }
+
+        .dev-box p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 24px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 32px 20px;
+            border-top: 1px solid rgba(198, 169, 107, 0.15);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 60px;
+        }
+
+        footer a {
+            color: var(--gold);
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .nav-links a {
+                margin: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="/" class="brand">NOORAYA</a>
+        <nav class="nav-links">
+            <a href="#features">Features</a>
+            <a href="https://shayan-aqudas.github.io/nooraya-policy/">Privacy Policy</a>
+            <a href="mailto:shayanaqudas111@gmail.com">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">✨ All-in-One Islamic Companion App</div>
+        <h1><span>Nooraya:</span> Quran, Hadith & Salah</h1>
+        <p>Experience a peaceful, modern, and distraction-free Islamic lifestyle companion. Read the Holy Quran, listen to soulful audio recitations, track accurate prayer times, and explore authentic Hadiths.</p>
+        <div class="cta-group">
+            <a href="https://play.google.com/store/apps/details?id=com.nooraya.app" class="btn-primary" target="_blank">
+                Get it on Google Play
+            </a>
+            <a href="https://shayan-aqudas.github.io/nooraya-policy/" class="btn-secondary">
+                Privacy Policy
+            </a>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="card">
+            <div class="card-icon">📖</div>
+            <h3>Holy Quran & Audio</h3>
+            <p>Read the complete Holy Quran with clear typography and listen to crystal-clear audio recitations anytime, anywhere.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">🕌</div>
+            <h3>Accurate Salah Timings</h3>
+            <p>Location-based daily prayer times and Azan alerts so you never miss your daily prayers.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">📜</div>
+            <h3>Authentic Hadith</h3>
+            <p>Access curated collections of authentic Hadiths for daily spiritual reflection and guidance.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">🧭</div>
+            <h3>Qibla & Digital Tasbih</h3>
+            <p>Built-in precision Qibla compass and a smooth digital Tasbih counter for your daily Dhikr.</p>
+        </div>
+    </section>
+
+    <section class="dev-section">
+        <div class="dev-box">
+            <h2>Developed by Shayan Aqudas</h2>
+            <p>Focused on building clean, reliable, and user-centric mobile and web applications. Need support with Nooraya or have feedback to share?</p>
+            <a href="mailto:shayanaqudas111@gmail.com" class="btn-secondary">Email Support: shayanaqudas111@gmail.com</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Shayan Aqudas. All rights reserved.</p>
+        <p style="margin-top: 8px;">
+            <a href="https://shayan-aqudas.github.io/nooraya-policy/">Privacy Policy</a> | 
+            <a href="https://shayan-aqudas.github.io/app-ads.txt">app-ads.txt</a> | 
+            <a href="mailto:shayanaqudas111@gmail.com">Support</a>
+        </p>
+    </footer>
+
+</body>
+</html>
