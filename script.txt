@@ -1,0 +1,155 @@
+/**
+ * Shayan Aqudas — Luxury Developer Portfolio
+ * Interactive Three.js Background & GSAP Dynamics
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Initialize Lucide Icons
+    if (window.lucide) {
+        lucide.createIcons();
+    }
+
+    // 2. Three.js Interactive 3D Gold & Emerald Constellation Background
+    initThreeBackground();
+
+    // 3. GSAP Animations & Reveal Timelines
+    initScrollAnimations();
+});
+
+/**
+ * Three.js Particle Universe with Interactive Mouse/Touch Parallax
+ */
+function initThreeBackground() {
+    const canvas = document.getElementById('bg-canvas');
+    if (!canvas || !window.THREE) return;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
+    camera.position.z = 400;
+
+    const renderer = new THREE.WebGLRenderer({
+        canvas: canvas,
+        alpha: true,
+        antialias: true
+    });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    // Particle Geometry
+    const particleCount = window.innerWidth < 768 ? 200 : 450;
+    const geometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3);
+    const colors = new Float32Array(particleCount * 3);
+
+    // Color Palette: Champagne Gold (#C6A96B) & Deep Emerald (#1A4314)
+    const goldColor = new THREE.Color(0xC6A96B);
+    const emeraldColor = new THREE.Color(0x234B35);
+
+    for (let i = 0; i < particleCount * 3; i += 3) {
+        positions[i] = (Math.random() - 0.5) * 1000;
+        positions[i + 1] = (Math.random() - 0.5) * 1000;
+        positions[i + 2] = (Math.random() - 0.5) * 800;
+
+        const mixedColor = Math.random() > 0.4 ? goldColor : emeraldColor;
+        colors[i] = mixedColor.r;
+        colors[i + 1] = mixedColor.g;
+        colors[i + 2] = mixedColor.b;
+    }
+
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+    // Material
+    const material = new THREE.PointsMaterial({
+        size: 3.2,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.75,
+        blending: THREE.AdditiveBlending
+    });
+
+    const particles = new THREE.Points(geometry, material);
+    scene.add(particles);
+
+    // Mouse & Touch Tracking
+    let mouseX = 0;
+    let mouseY = 0;
+    let targetX = 0;
+    let targetY = 0;
+
+    window.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX - window.innerWidth / 2) * 0.2;
+        mouseY = (e.clientY - window.innerHeight / 2) * 0.2;
+    });
+
+    window.addEventListener('touchmove', (e) => {
+        if (e.touches.length > 0) {
+            mouseX = (e.touches[0].clientX - window.innerWidth / 2) * 0.15;
+            mouseY = (e.touches[0].clientY - window.innerHeight / 2) * 0.15;
+        }
+    }, { passive: true });
+
+    // Window Resize Handler
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // Animation Loop
+    function animate() {
+        requestAnimationFrame(animate);
+
+        // Smooth Parallax Lerp
+        targetX += (mouseX - targetX) * 0.04;
+        targetY += (mouseY - targetY) * 0.04;
+
+        particles.rotation.y += 0.0006;
+        particles.rotation.x += 0.0003;
+
+        camera.position.x = targetX;
+        camera.position.y = -targetY;
+        camera.lookAt(scene.position);
+
+        renderer.render(scene, camera);
+    }
+
+    animate();
+}
+
+/**
+ * GSAP ScrollTrigger Animations
+ */
+function initScrollAnimations() {
+    if (!window.gsap) return;
+
+    // Register Plugin if available
+    if (window.ScrollTrigger) {
+        gsap.registerPlugin(ScrollTrigger);
+    }
+
+    // Hero Entry Animation
+    gsap.from('.hero-badge', { opacity: 0, y: -20, duration: 0.8, ease: 'power3.out', delay: 0.2 });
+    gsap.from('.hero-title', { opacity: 0, y: 30, duration: 1, ease: 'power3.out', delay: 0.4 });
+    gsap.from('.hero-description', { opacity: 0, y: 20, duration: 0.9, ease: 'power3.out', delay: 0.6 });
+    gsap.from('.hero-actions', { opacity: 0, y: 20, duration: 0.8, ease: 'power3.out', delay: 0.8 });
+    gsap.from('.stat-card', { opacity: 0, y: 20, duration: 0.8, stagger: 0.15, ease: 'power3.out', delay: 1 });
+
+    // Section Cards Reveal on Scroll
+    const cards = document.querySelectorAll('.glass-card');
+    cards.forEach((card) => {
+        if (window.ScrollTrigger) {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                },
+                opacity: 0,
+                y: 35,
+                duration: 0.85,
+                ease: 'power3.out'
+            });
+        }
+    });
+}
